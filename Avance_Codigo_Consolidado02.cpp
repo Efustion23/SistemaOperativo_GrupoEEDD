@@ -12,6 +12,14 @@ struct Proceso {
 
 Proceso* cabeza = nullptr;
 
+// ====== ESTRUCTURA PARA COLA DE PRIORIDAD (CPU) ======
+struct NodoCola {
+    Proceso* proceso;
+    NodoCola* siguiente;
+};
+
+NodoCola* frente = nullptr;
+
 asignarMemoria()
 {
     cout << "Función para asignar memoria." << "\n";
