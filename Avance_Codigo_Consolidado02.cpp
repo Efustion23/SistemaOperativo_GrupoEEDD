@@ -20,21 +20,47 @@ struct NodoCola {
 
 NodoCola* frente = nullptr;
 
+// ====== ESTRUCTURA PARA PILA (MEMORIA) ======
+struct BloqueMemoria {
+    int idProceso;
+    BloqueMemoria* siguiente;
+};
 asignarMemoria()
 {
-    cout << "Función para asignar memoria." << "\n";
-    
+   int id;
+    cout << "Ingrese el ID del proceso: ";
+    cin >> id;
+    BloqueMemoria* nuevo = new BloqueMemoria;
+    nuevo->idProceso = id;
+    nuevo->siguiente = cima;
+    cima = nuevo;
+    cout << "Memoria asignada al proceso " << id << endl;
 }
 
 liberarMemoria()
 {
-    cout << "Función para liberar memoria." << "\n";
+    if (cima == nullptr) {
+        cout << "No hay memoria que liberar.\n";
+        return;
+    }
+    BloqueMemoria* temp = cima;
+    cima = cima->siguiente;
+    cout << "Memoria liberada del proceso " << temp->idProceso << endl;
+    delete temp;
     
 }
 
 mostrarEstadoMemoria()
 {
-    cout << "Función para mostrar el estado de la memoria." << "\n";
+   if (cima == nullptr) {
+        cout << "No hay bloques de memoria asignados.\n";
+        return;
+    }
+    BloqueMemoria* actual = cima;
+    while (actual != nullptr) {
+        cout << "Proceso: " << actual->idProceso << endl;
+        actual = actual->siguiente;
+    }
     
 }
 
@@ -87,18 +113,60 @@ int gestionarMemoria()
 encolarProceso()
 {
     cout << "Función para encolar un proceso." << "\n";
+     int id;
+    cout << "Ingrese el ID del proceso a encolar: ";
+    cin >> id;
+
+    Proceso* actual = cabeza;
+    while (actual != nullptr && actual->id != id) {
+        actual = actual->siguiente;
+    }
+    if (actual == nullptr) {
+        cout << "Proceso no encontrado.\n";
+        return;
+    }
+    NodoCola* nuevo = new NodoCola;
+    nuevo->proceso = actual;
+    nuevo->siguiente = nullptr;
+
+    if (frente == nullptr) {
+        frente = fin = nuevo;
+    } else {
+        fin->siguiente = nuevo;
+        fin = nuevo;
+    }
+    cout << "Proceso encolado.\n";
+}
 
 }
 
 ejecutarProceso()
 {
     cout << "Función para ejecutar un proceso." << "\n";
+     if (frente == nullptr) {
+        cout << "No hay procesos en la cola.\n";
+        return;
+    }
+    NodoCola* temp = frente;
+    frente = frente->siguiente;
+    cout << "Ejecutando proceso ID: " << temp->proceso->id << ", Nombre: " << temp->proceso->nombre << endl;
+    delete temp;
+    if (frente == nullptr) fin = nullptr;
 
 }
 
 mostrarCola()
 {
     cout << "Función para mostrar los procesos en cola." << "\n";
+    if (frente == nullptr) {
+        cout << "Cola vacía.\n";
+        return;
+    }
+    NodoCola* actual = frente;
+    while (actual != nullptr) {
+        cout << "ID: " << actual->proceso->id << ", Nombre: " << actual->proceso->nombre << endl;
+        actual = actual->siguiente;
+    }
 
 }
 
@@ -149,37 +217,119 @@ int gestionarCPU()
 
 agregarProceso()
 {
-    cout << "Función para agregar un proceso." << "\n";
+   int id, prioridad;
+    string nombre;
+    cout << "Ingrese ID: "; cin >> id;
+    cout << "Ingrese nombre: "; cin.ignore(); getline(cin, nombre);
+    cout << "Ingrese prioridad: "; cin >> prioridad;
 
+    Proceso* actual = cabeza;
+    while (actual != nullptr) {
+        if (actual->id == id) {
+            cout << "ID ya existe.\n";
+            return;
+        }
+        actual = actual->siguiente;
+    }
+
+    Proceso* nuevo = new Proceso;
+    nuevo->id = id;
+    nuevo->nombre = nombre;
+    nuevo->prioridad = prioridad;
+    nuevo->siguiente = nullptr;
+
+    if (cabeza == nullptr) cabeza = nuevo;
+    else {
+        actual = cabeza;
+        while (actual->siguiente != nullptr) actual = actual->siguiente;
+        actual->siguiente = nuevo;
+    }
+    cout << "Proceso agregado.\n";
 }
 
 buscarProceso()
 {
     cout << "Función para buscar un proceso." << "\n";
+     int id;
+    cout << "Ingrese ID del proceso a buscar: "; cin >> id;
+    Proceso* actual = cabeza;
+    while (actual != nullptr) {
+        if (actual->id == id) {
+            cout << "Nombre: " << actual->nombre << ", Prioridad: " << actual->prioridad << endl;
+            return;
+        }
+        actual = actual->siguiente;
+    }
+    cout << "Proceso no encontrado.\n";
 
 }
 
 eliminarProceso()
 {
     cout << "Función para eliminar un proceso." << "\n";
+    int id;
+    cout << "Ingrese ID del proceso a eliminar: "; cin >> id;
+    if (cabeza == nullptr) return;
+    if (cabeza->id == id) {
+        Proceso* temp = cabeza;
+        cabeza = cabeza->siguiente;
+        delete temp;
+        cout << "Proceso eliminado.\n";
+        return;
+    }
+    Proceso* actual = cabeza;
+    while (actual->siguiente != nullptr && actual->siguiente->id != id) {
+        actual = actual->siguiente;
+    }
+    if (actual->siguiente != nullptr) {
+        Proceso* temp = actual->siguiente;
+        actual->siguiente = temp->siguiente;
+        delete temp;
+        cout << "Proceso eliminado.\n";
+    } else {
+        cout << "Proceso no encontrado.\n";
+    }
 
 }
 
 modificarPrioridad()
 {
     cout << "Función para modificar la prioridad de un proceso." << "\n";
+     int id, nuevaPrioridad;
+    cout << "Ingrese ID del proceso: "; cin >> id;
+    Proceso* actual = cabeza;
+    while (actual != nullptr) {
+        if (actual->id == id) {
+            cout << "Ingrese nueva prioridad: "; cin >> nuevaPrioridad;
+            actual->prioridad = nuevaPrioridad;
+            cout << "Prioridad actualizada.\n";
+            return;
+        }
+        actual = actual->siguiente;
+    }
+    cout << "Proceso no encontrado.\n";
 
 }
 
 mostrarTodos()
 {
     cout << "Función para mostrar todos los procesos." << "\n";
+    if (cabeza == nullptr) {
+        cout << "No hay procesos registrados.\n";
+        return;
+    }
+    Proceso* actual = cabeza;
+    while (actual != nullptr) {
+        cout << "ID: " << actual->id << ", Nombre: " << actual->nombre << ", Prioridad: " << actual->prioridad << endl;
+        actual = actual->siguiente;
+    }
 
 }
 
 int gestionarProcesos()
 {
     cout << "Función para gestionar procesos." << "\n";
+    
 
     int op1;
 
