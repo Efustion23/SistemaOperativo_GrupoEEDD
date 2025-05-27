@@ -12,7 +12,7 @@ struct Proceso {
 
 Proceso* cabeza = nullptr;
 
-// ====== ESTRUCTURA PARA COLA DE PRIORIDAD (CPU) ======
+// ====== ESTRUCTURA PARA COLA (CPU) ======
 struct NodoCola {
     Proceso* proceso;
     NodoCola* siguiente;
