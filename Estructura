@@ -1,0 +1,23 @@
+Lista
+La lista se utiliza para almacenar todos los procesos que han sido registrados por el usuario. Esta estructura permite recorrer los elementos de forma secuencial y es especialmente útil cuando se requiere acceder, modificar o eliminar un proceso específico con base en su ID. Su estructura enlazada permite un crecimiento dinámico, lo que la hace eficiente para la inserción y eliminación de procesos sin necesidad de reorganizar toda la estructura.
+Funciones principales:
+agregarProceso(): Inserta un nuevo proceso al final de la lista si el ID no está repetido.
+buscarProceso(): Recorre la lista para encontrar y devolver el nodo cuyo ID coincida.
+eliminarProceso(): Busca el nodo por ID y lo elimina ajustando los punteros.
+modificarPrioridad(): Cambia la prioridad del proceso cuyo ID se indique.
+mostrarTodos(): Recorre la lista e imprime los datos de todos los procesos registrados.
+Esta estructura permite gestionar de forma eficiente los procesos activos y realizar operaciones específicas sin depender de estructuras estáticas.
+Cola
+La cola se implementa para simular el planificador de la CPU. Es una cola de prioridad que permite almacenar procesos en orden según su prioridad: los de mayor prioridad se colocan primero. Esto simula la manera en que un sistema operativo selecciona el siguiente proceso a ejecutar.
+Funciones principales:
+encolarProceso(): Inserta un proceso en la posición adecuada dentro de la cola, según su prioridad (mayor prioridad al frente).
+ejecutarProceso(): Elimina y devuelve el proceso que está al frente de la cola, simulando su ejecución.
+mostrarCola(): Recorre e imprime el contenido de la cola en orden de ejecución.
+Esta estructura refleja un comportamiento real del sistema operativo en la asignación del CPU, donde se prioriza la atención a tareas críticas.
+Pila
+La pila se usa para gestionar los bloques de memoria asignados a los procesos. Opera bajo la lógica LIFO (Last In, First Out), es decir, el último bloque asignado es el primero en ser liberado. Esta estrategia representa la asignación temporal de memoria en muchos sistemas, como el uso de la pila de llamadas.
+Funciones principales:
+asignarMemoria(): Crea un nuevo bloque de memoria para un proceso específico y lo apila en la cima.
+liberarMemoria(): Elimina el bloque que está en la cima de la pila, liberando memoria para otros procesos.
+mostrarEstadoMemoria(): Recorre la pila desde el tope hacia abajo mostrando el estado actual de la asignación de memoria.
+El uso de una pila permite simular de forma realista la asignación temporal de memoria en ejecuciones anidadas o recursivas, como funciones o tareas dependientes.
