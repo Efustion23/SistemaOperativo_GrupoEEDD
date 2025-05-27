@@ -4,26 +4,26 @@ using namespace std;
 
 asignarMemoria()
 {
-    cout << "Función para asignar memoria." << "\n";
+    cout << "FunciÃ³n para asignar memoria." << "\n";
     
 }
 
 liberarMemoria()
 {
-    cout << "Función para liberar memoria." << "\n";
+    cout << "FunciÃ³n para liberar memoria." << "\n";
     
 }
 
 mostrarEstadoMemoria()
 {
-    cout << "Función para mostrar el estado de la memoria." << "\n";
+    cout << "FunciÃ³n para mostrar el estado de la memoria." << "\n";
     
 }
 
 
 int gestionarMemoria()
 {
-    cout << "Función para gestionar memoria." << "\n";
+    cout << "FunciÃ³n para gestionar memoria." << "\n";
     int op3;
 
     do
@@ -34,30 +34,30 @@ int gestionarMemoria()
         cout << "1. Asignar Memoria" << "\n";
         cout << "2. Liberar Memoria" << "\n";
         cout << "3. Mostrar Estado de Memoria" << "\n";
-        cout << "4. Volver al menú principal" << "\n";
+        cout << "4. Volver al menÃº principal" << "\n";
         cout << "================================" << "\n";
-        cout << "Seleccione una opción: ";
+        cout << "Seleccione una opciÃ³n: ";
         cin >> op3;
         switch (op3)
         {
         case 1:
-            cout << "Usted ha seleccionado la opción 1: Asignar Memoria" << "\n";
+            cout << "Usted ha seleccionado la opciÃ³n 1: Asignar Memoria" << "\n";
             asignarMemoria();
             break;
         case 2:
-            cout << "Usted ha seleccionado la opción 2: Liberar Memoria" << "\n";
+            cout << "Usted ha seleccionado la opciÃ³n 2: Liberar Memoria" << "\n";
             liberarMemoria();
             break;
         case 3:
-            cout << "Usted ha seleccionado la opción 3: Mostrar Memoria Asignada" << "\n";
+            cout << "Usted ha seleccionado la opciÃ³n 3: Mostrar Memoria Asignada" << "\n";
             mostrarEstadoMemoria();
             break;
         case 4:
-            cout << "Volviendo al menú principal..." << "\n";
+            cout << "Volviendo al menÃº principal..." << "\n";
             main();
             break;
         default:  
-            cout << "Opción no válida, por favor intente de nuevo." << "\n";
+            cout << "OpciÃ³n no vÃ¡lida, por favor intente de nuevo." << "\n";
         }
         
 
@@ -68,25 +68,25 @@ int gestionarMemoria()
 
 encolarProceso()
 {
-    cout << "Función para encolar un proceso." << "\n";
+    cout << "FunciÃ³n para encolar un proceso." << "\n";
 
 }
 
 ejecutarProceso()
 {
-    cout << "Función para ejecutar un proceso." << "\n";
+    cout << "FunciÃ³n para ejecutar un proceso." << "\n";
 
 }
 
 mostrarCola()
 {
-    cout << "Función para mostrar los procesos en cola." << "\n";
+    cout << "FunciÃ³n para mostrar los procesos en cola." << "\n";
 
 }
 
 int gestionarCPU()
 {
-    cout << "Función para gestionar CPU." << "\n";
+    cout << "FunciÃ³n para gestionar CPU." << "\n";
     int op2;
 
     do
@@ -97,30 +97,30 @@ int gestionarCPU()
         cout << "1. Encolar Proceso" << "\n";
         cout << "2. Ejecutar Proceso" << "\n";
         cout << "3. Mostrar Procesos en Cola" << "\n";
-        cout << "4. Volver al menú principal" << "\n";
+        cout << "4. Volver al menÃº principal" << "\n";
         cout << "================================" << "\n";
-        cout << "Seleccione una opción: ";
+        cout << "Seleccione una opciÃ³n: ";
         cin >> op2;
         switch (op2)
         {
         case 1:
-            cout << "Usted ha seleccionado la opción 1: Encolar Proceso" << "\n";
+            cout << "Usted ha seleccionado la opciÃ³n 1: Encolar Proceso" << "\n";
             encolarProceso();
             break;
         case 2:
-            cout << "Usted ha seleccionado la opción 2: Ejecutar Proceso" << "\n";
+            cout << "Usted ha seleccionado la opciÃ³n 2: Ejecutar Proceso" << "\n";
             ejecutarProceso();
             break;
         case 3:
-            cout << "Usted ha seleccionado la opción 3: Mostrar Procesos en Cola" << "\n";
+            cout << "Usted ha seleccionado la opciÃ³n 3: Mostrar Procesos en Cola" << "\n";
             mostrarCola();
             break;
         case 4:
-            cout << "Volviendo al menú principal..." << "\n";
+            cout << "Volviendo al menÃº principal..." << "\n";
             main();
             break;
         default:  
-            cout << "Opción no válida, por favor intente de nuevo." << "\n";
+            cout << "OpciÃ³n no vÃ¡lida, por favor intente de nuevo." << "\n";
         }
         
 
@@ -131,37 +131,37 @@ int gestionarCPU()
 
 agregarProceso()
 {
-    cout << "Función para agregar un proceso." << "\n";
+    cout << "FunciÃ³n para agregar un proceso." << "\n";
 
 }
 
 buscarProceso()
 {
-    cout << "Función para buscar un proceso." << "\n";
+    cout << "FunciÃ³n para buscar un proceso." << "\n";
 
 }
 
 eliminarProceso()
 {
-    cout << "Función para eliminar un proceso." << "\n";
+    cout << "FunciÃ³n para eliminar un proceso." << "\n";
 
 }
 
 modificarPrioridad()
 {
-    cout << "Función para modificar la prioridad de un proceso." << "\n";
+    cout << "FunciÃ³n para modificar la prioridad de un proceso." << "\n";
 
 }
 
 mostrarTodos()
 {
-    cout << "Función para mostrar todos los procesos." << "\n";
+    cout << "FunciÃ³n para mostrar todos los procesos." << "\n";
 
 }
 
 int gestionarProcesos()
 {
-    cout << "Función para gestionar procesos." << "\n";
+    cout << "FunciÃ³n para gestionar procesos." << "\n";
 
     int op1;
 
@@ -175,40 +175,40 @@ int gestionarProcesos()
         cout << "3. Eliminar Proceso" << "\n";
         cout << "4. Modificar Prioridad" << "\n";
         cout << "5. Mostrar Procesos" << "\n";
-        cout << "6. Volver al menú principal" << "\n";
+        cout << "6. Volver al menÃº principal" << "\n";
         cout << "================================" << "\n";
 
-        cout << "Seleccione una opción: ";
+        cout << "Seleccione una opciÃ³n: ";
         cin >> op1;
 
         switch(op1) {
             case 1:
-                cout << "Usted ha seleccionado la opción 1: Crear Proceso" << "\n";
+                cout << "Usted ha seleccionado la opciÃ³n 1: Crear Proceso" << "\n";
                 agregarProceso();
                 break;
             case 2:
-                cout << "Usted ha seleccionado la opción 2: Listar Procesos" << "\n";
+                cout << "Usted ha seleccionado la opciÃ³n 2: Listar Procesos" << "\n";
                 buscarProceso();
                 break;
             case 3:
-                cout << "Usted ha seleccionado la opción 3: Eliminar Proceso" << "\n";
+                cout << "Usted ha seleccionado la opciÃ³n 3: Eliminar Proceso" << "\n";
                 eliminarProceso();
                 break;
             case 4:
-                cout << "Usted ha seleccionado la opción 4: Modificar Prioridad" << "\n";
+                cout << "Usted ha seleccionado la opciÃ³n 4: Modificar Prioridad" << "\n";
                 modificarPrioridad();
                 break;
 
             case 5:
-                cout << "Usted ha seleccionado la opción 5: Mostrar Procesos" << "\n";
+                cout << "Usted ha seleccionado la opciÃ³n 5: Mostrar Procesos" << "\n";
                 mostrarTodos();
                 break;
             case 6:
-                cout << "Volviendo al menú principal..." << "\n";
+                cout << "Volviendo al menÃº principal..." << "\n";
                 main();
                 break;
             default:
-                cout << "Opción no válida, por favor intente de nuevo." << "\n";
+                cout << "OpciÃ³n no vÃ¡lida, por favor intente de nuevo." << "\n";
         }
     }while (opcion != 6);
 
@@ -220,11 +220,11 @@ int main() {
 
     do 
     {
-        // Mostramos el menú para que el usuario elija una acción
+        // Mostramos el menÃº para que el usuario elija una acciÃ³n
         cout << "\n================================" << "\n";
         cout << "\tSea Bienvenido" << "\n";
         cout << "================================" << "\n";
-        cout << "Sistema de Gestión de Datos" << "\n"; 
+        cout << "Sistema de GestiÃ³n de Datos" << "\n"; 
         cout << "\n================================" << "\n";
         cout << "\tMENU DE OPCIONES" << "\n";
         cout << "================================" << "\n";
@@ -234,29 +234,29 @@ int main() {
         cout << "4. Salir" << "\n";
         cout << "================================" << "\n";
 
-        cout << "Seleccione una opción: ";
+        cout << "Seleccione una opciÃ³n: ";
         cin >> opcion;
 
-        // Ejecutamos la opción seleccionada
+        // Ejecutamos la opciÃ³n seleccionada
         switch(opcion) {
             case 1:
-                cout << "Usted ha seleccionado la opción 1: Gestionar Procesos" << "\n";
+                cout << "Usted ha seleccionado la opciÃ³n 1: Gestionar Procesos" << "\n";
                 gestionarProcesos();
                 break;
             case 2:
-                cout << "Usted ha seleccionado la opción 2: Gestionar CPU" << "\n";
+                cout << "Usted ha seleccionado la opciÃ³n 2: Gestionar CPU" << "\n";
                 gestionarCPU();
                 break;
             case 3:
-                cout << "Usted ha seleccionado la opción 3: Gestionar Memoria" << "\n";
+                cout << "Usted ha seleccionado la opciÃ³n 3: Gestionar Memoria" << "\n";
                 gestionarMemoria();
                 break;
             case 4:
-                cout << "Usted ha seleccionado la opción 4: Salir" << "\n";
+                cout << "Usted ha seleccionado la opciÃ³n 4: Salir" << "\n";
                 cout << "Saliendo del sistema..." << "\n";
                 break;
             default:
-                cout << "Opción no válida, por favor intente de nuevo." << "\n";
+                cout << "OpciÃ³n no vÃ¡lida, por favor intente de nuevo." << "\n";
         }
 
     } while (opcion != 4);  
