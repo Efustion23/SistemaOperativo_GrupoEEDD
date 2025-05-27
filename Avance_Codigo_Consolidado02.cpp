@@ -127,6 +127,7 @@ int gestionarCPU()
     } while (opcion != 4);
     
     return 0;
+    
 }
 
 agregarProceso()
