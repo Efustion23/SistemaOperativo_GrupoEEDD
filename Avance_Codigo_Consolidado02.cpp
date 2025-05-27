@@ -2,6 +2,16 @@
 #include <string>
 using namespace std;
 
+// ====== ESTRUCTURA PARA PROCESOS ======
+struct Proceso {
+    int id;
+    string nombre;
+    int prioridad;
+    Proceso* siguiente;
+};
+
+Proceso* cabeza = nullptr;
+
 asignarMemoria()
 {
     cout << "Función para asignar memoria." << "\n";
