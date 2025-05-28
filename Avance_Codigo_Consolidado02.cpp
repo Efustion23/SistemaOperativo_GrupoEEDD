@@ -1,25 +1,34 @@
 #include <iostream>
 #include <string>
 using namespace std;
+
+// Constante para el tamaño máximo de estructuras
 const int MAX = 50;
 
+// ====== ESTRUCTURAS DE DATOS ======
+
+// Estructura para representar un proceso
 struct Proceso {
     int id;
     string nombre;
     int prioridad;
 };
 
+// Variables para la lista de procesos
 Proceso listaProcesos[MAX];
 int cantidadProcesos = 0;
 
+// Variables para la cola de CPU (planificador)
 Proceso colaCPU[MAX];
 int frenteCPU = 0;
     int finalCPU = -1;
 int cantidadCPU = 0;
 
+// Variables para la pila de memoria
 Proceso pilaMemoria[MAX];
 int topeMemoria = -1;
 
+// ====== FUNCIONES PARA PROCESOS (LISTA) ======
 bool listaProcesosLlena() {
     return cantidadProcesos == MAX;
 }
@@ -284,6 +293,28 @@ void menuCPU() {
         }
     } while (opcion != 4);
 }
+
+void menuMemoria() {
+    int opcion;
+    do {
+        cout << "\n=== GESTION DE MEMORIA ===\n";
+        cout << "1. Asignar memoria a proceso\n";
+        cout << "2. Liberar memoria\n";
+        cout << "3. Mostrar estado de memoria\n";
+        cout << "4. Volver al menú principal\n";
+        cout << "Seleccione una opción: ";
+        cin >> opcion;
+        
+        switch(opcion) {
+            case 1: asignarMemoria(); break;
+            case 2: liberarMemoria(); break;
+            case 3: mostrarMemoria(); break;
+            case 4: break;
+            default: cout << "Opción no válida.\n";
+        }
+    } while (opcion != 4);
+}
+
 
 encolarProceso()
 {
