@@ -3,36 +3,27 @@
 using namespace std;
 const int MAX = 50;
 
-// ====== ESTRUCTURAS DE DATOS ======
-
-// Estructura para representar un proceso
 struct Proceso {
     int id;
     string nombre;
     int prioridad;
 };
 
-// ====== ESTRUCTURA PARA COLA (CPU) ======
 struct NodoCola {
     Proceso* proceso;
     NodoCola* siguiente;
 };
 
-// Variables para la lista de procesos
 Proceso listaProcesos[MAX];
 int cantidadProcesos = 0;
 
-// Variables para la cola de CPU (planificador)
 Proceso colaCPU[MAX];
 int frenteCPU = 0;
     int finalCPU = -1;
 int cantidadCPU = 0;
 
-// Variables para la pila de memoria
 Proceso pilaMemoria[MAX];
 int topeMemoria = -1;
-
-// ====== FUNCIONES PARA PROCESOS (LISTA) ======
 
 bool listaProcesosLlena() {
     return cantidadProcesos == MAX;
