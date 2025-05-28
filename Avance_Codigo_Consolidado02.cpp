@@ -70,6 +70,21 @@ void agregarProceso() {
     cout << "Proceso agregado correctamente.\n";
 }
 
+void mostrarProcesos() {
+    if (cantidadProcesos == 0) {
+        cout << "No hay procesos registrados.\n";
+        return;
+    }
+    
+    cout << "\n=== LISTA DE PROCESOS ===\n";
+    for (int i = 0; i < cantidadProcesos; i++) {
+        cout << "ID: " << listaProcesos[i].id 
+             << " | Nombre: " << listaProcesos[i].nombre 
+             << " | Prioridad: " << listaProcesos[i].prioridad << "\n";
+    }
+}
+
+
 
 
 
