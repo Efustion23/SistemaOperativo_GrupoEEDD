@@ -18,6 +18,22 @@ struct NodoCola {
     NodoCola* siguiente;
 };
 
+// Variables para la lista de procesos
+Proceso listaProcesos[MAX];
+int cantidadProcesos = 0;
+
+// Variables para la cola de CPU (planificador)
+Proceso colaCPU[MAX];
+int frenteCPU = 0;
+    int finalCPU = -1;
+int cantidadCPU = 0;
+
+// Variables para la pila de memoria
+Proceso pilaMemoria[MAX];
+int topeMemoria = -1;
+
+
+
 NodoCola* frente = nullptr;
 
 // ====== ESTRUCTURA PARA PILA (MEMORIA) ======
