@@ -3,9 +3,6 @@
 #include <sstream> // Esto es para convertir string a int/float, en parte es importante
 using namespace std;
 
-// ====== ESTRUCTURAS DE DATOS ======
-
-// Estructura para representar un proceso
 struct Proceso {
     int id;
     string nombre;
@@ -13,98 +10,150 @@ struct Proceso {
     float memoriaMB;
 };
 
-// Variables para la lista de procesos
-Proceso listaProcesos[MAX];
-int cantidadProcesos = 0;
+// === LISTA ENLAZADA PARA PROCESOS ===
+struct NodoProceso
+{
+    Proceso dato;
+    NodoProceso* siguiente;
+};
+NodoProceso* cabeza = NULL;
 
-// Variables para la cola de CPU (planificador)
-Proceso colaCPU[MAX];
-int frenteCPU = 0;
-    int finalCPU = -1;
-int cantidadCPU = 0;
+// === COLA DE PRIORIDAD PARA CPU ===
+struct NodoCola
+{
+    Proceso dato;
+    NodoCola* siguiente;
+};
+NodoCola* frenteCPU = NULL;
+NodoCola* finalCPU = NULL;
 
-// Variables para la pila de memoria
-Proceso pilaMemoria[MAX];
-int topeMemoria = -1;
+// === PILA PARA MEMORIA ===
+struct NodoPila
+{
+    Proceso dato;
+    NodoPila* siguiente;
+};
+NodoPila* topeMemoria = NULL;
 
-// ====== FUNCIONES PARA PROCESOS (LISTA) ======
-bool listaProcesosLlena() {
-    return cantidadProcesos == MAX;
+// ====== FUNCIONES DE LA LISTA ======
+
+bool existeProceso(int id)
+{
+    NodoProceso* actual = cabeza;
+    
+    while (actual != NULL)
+	{
+        if (actual->dato.id == id) return true;
+        actual = actual->siguiente;
+    }
+    return false;
 }
 
 void agregarProceso() {
-    if (listaProcesosLlena()) {
-        cout << "Error: No se pueden agregar más procesos. Límite alcanzado.\n";
+    Proceso nuevo;
+    cout << "Ingrese ID del proceso: "; cin >> nuevo.id;
+    if (existeProceso(nuevo.id))
+	{
+        cout << "Error: Ya existe un proceso con ese ID.\n";
         return;
     }
+    cin.ignore();
+    cout << "Ingrese nombre del proceso: "; getline(cin, nuevo.nombre);
+    cout << "Ingrese prioridad (1-10): "; cin >> nuevo.prioridad;
+    cout << "Ingrese memoria que usará el proceso (MB): "; cin >> nuevo.memoriaMB;
 
-    Proceso nuevo;
-    cout << "Ingrese ID del proceso: ";
-    cin >> nuevo.id;
-    
-    // Verificar si el ID ya existe
-    for (int i = 0; i < cantidadProcesos; i++) {
-        if (listaProcesos[i].id == nuevo.id) {
-            cout << "Error: Ya existe un proceso con ese ID.\n";
-            return;
-        }
+    NodoProceso* nodo = new NodoProceso;
+    nodo->dato = nuevo;
+    nodo->siguiente = NULL;
+
+    if (cabeza == NULL) cabeza = nodo;
+    else
+	{
+        NodoProceso* actual = cabeza;
+        while (actual->siguiente != NULL) actual = actual->siguiente;
+        actual->siguiente = nodo;
     }
-    
-    cin.ignore(); // Limpiar el buffer
-    cout << "Ingrese nombre del proceso: ";
-    getline(cin, nuevo.nombre);
-    
-    cout << "Ingrese prioridad (1-10, donde 10 es mayor prioridad): ";
-    cin >> nuevo.prioridad;
-    
-    // Agregar el proceso al final de la lista
-    listaProcesos[cantidadProcesos] = nuevo;
-    cantidadProcesos++;
-    
-    cout << "Proceso agregado correctamente.\n";
+    cout << "\n? Proceso agregado correctamente.\n";
 }
 
 void mostrarProcesos() {
-    if (cantidadProcesos == 0) {
-        cout << "No hay procesos registrados.\n";
-        return;
+    if (cabeza == NULL)
+	{
+        cout << "No hay procesos registrados.\n"; return;
     }
-    
     cout << "\n=== LISTA DE PROCESOS ===\n";
-    for (int i = 0; i < cantidadProcesos; i++) {
-        cout << "ID: " << listaProcesos[i].id 
-             << " | Nombre: " << listaProcesos[i].nombre 
-             << " | Prioridad: " << listaProcesos[i].prioridad << "\n";
+    NodoProceso* actual = cabeza;
+    while (actual != NULL)
+	{
+        cout << "ID: " << actual->dato.id
+             << " | Nombre: " << actual->dato.nombre
+             << " | Prioridad: " << actual->dato.prioridad
+             << " | Memoria: " << actual->dato.memoriaMB << " MB\n";
+        actual = actual->siguiente;
     }
 }
 
 void buscarProceso() {
     int id;
-    cout << "Ingrese ID del proceso a buscar: ";
-    cin >> id;
-    
-    for (int i = 0; i < cantidadProcesos; i++) {
-        if (listaProcesos[i].id == id) {
+    cout << "Ingrese ID del proceso a buscar: "; cin >> id;
+    NodoProceso* actual = cabeza;
+    while (actual != NULL)
+	{
+        if (actual->dato.id == id)
+		{
             cout << "\nProceso encontrado:\n";
-            cout << "ID: " << listaProcesos[i].id 
-                 << "\nNombre: " << listaProcesos[i].nombre 
-                 << "\nPrioridad: " << listaProcesos[i].prioridad << "\n";
+            cout << "ID: " << actual->dato.id << "\nNombre: " << actual->dato.nombre
+                 << "\nPrioridad: " << actual->dato.prioridad
+                 << "\nMemoria: " << actual->dato.memoriaMB << " MB\n";
             return;
         }
+        actual = actual->siguiente;
     }
-    
     cout << "Proceso no encontrado.\n";
 }
 
+void eliminarProceso()
+{
+    int id;
+    cout << "Ingrese ID del proceso a eliminar: "; cin >> id;
+    NodoProceso* actual = cabeza;
+    NodoProceso* anterior = NULL;
+    while (actual != NULL && actual->dato.id != id)
+	{
+        anterior = actual;
+        actual = actual->siguiente;
+    }
+    if (actual == NULL)
+	{
+        cout << "Proceso no encontrado.\n";
+        return;
+    }
+    if (anterior == NULL) cabeza = actual->siguiente;
+    else anterior->siguiente = actual->siguiente;
+    delete actual;
+    cout << "Proceso eliminado correctamente.\n";
+}
+void modificarPrioridad()
+{
+    int id, nuevaPrioridad;
+    cout << "Ingrese ID del proceso: "; cin >> id;
+    cout << "Ingrese nueva prioridad: "; cin >> nuevaPrioridad;
+    NodoProceso* actual = cabeza;
+    while (actual != NULL)
+	{
+        if (actual->dato.id == id)
+		{
+            actual->dato.prioridad = nuevaPrioridad;
+            cout << "Prioridad actualizada.\n";
+            return;
+        }
+        actual = actual->siguiente;
+    }
+    cout << "Proceso no encontrado.\n";
+}
+
+
 // ====== FUNCIONES PARA CPU (COLA DE PRIORIDAD) ======
-
-bool cpuLlena() {
-    return cantidadCPU == MAX;
-}
-
-bool cpuVacia() {
-    return cantidadCPU == 0;
-}
 
 void encolarProcesoCPU() {
     if (cpuLlena()) {
