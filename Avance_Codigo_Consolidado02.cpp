@@ -32,9 +32,13 @@ int cantidadCPU = 0;
 Proceso pilaMemoria[MAX];
 int topeMemoria = -1;
 
+// ====== FUNCIONES PARA PROCESOS (LISTA) ======
+
+bool listaProcesosLlena() {
+    return cantidadProcesos == MAX;
+}
 
 
-NodoCola* frente = nullptr;
 
 // ====== ESTRUCTURA PARA PILA (MEMORIA) ======
 struct BloqueMemoria {
