@@ -38,6 +38,39 @@ bool listaProcesosLlena() {
     return cantidadProcesos == MAX;
 }
 
+void agregarProceso() {
+    if (listaProcesosLlena()) {
+        cout << "Error: No se pueden agregar más procesos. Límite alcanzado.\n";
+        return;
+    }
+
+    Proceso nuevo;
+    cout << "Ingrese ID del proceso: ";
+    cin >> nuevo.id;
+    
+    // Verificar si el ID ya existe
+    for (int i = 0; i < cantidadProcesos; i++) {
+        if (listaProcesos[i].id == nuevo.id) {
+            cout << "Error: Ya existe un proceso con ese ID.\n";
+            return;
+        }
+    }
+    
+    cin.ignore(); // Limpiar el buffer
+    cout << "Ingrese nombre del proceso: ";
+    getline(cin, nuevo.nombre);
+    
+    cout << "Ingrese prioridad (1-10, donde 10 es mayor prioridad): ";
+    cin >> nuevo.prioridad;
+    
+    // Agregar el proceso al final de la lista
+    listaProcesos[cantidadProcesos] = nuevo;
+    cantidadProcesos++;
+    
+    cout << "Proceso agregado correctamente.\n";
+}
+
+
 
 
 // ====== ESTRUCTURA PARA PILA (MEMORIA) ======
