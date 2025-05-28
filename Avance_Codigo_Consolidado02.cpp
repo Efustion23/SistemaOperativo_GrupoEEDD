@@ -84,7 +84,23 @@ void mostrarProcesos() {
     }
 }
 
-
+void buscarProceso() {
+    int id;
+    cout << "Ingrese ID del proceso a buscar: ";
+    cin >> id;
+    
+    for (int i = 0; i < cantidadProcesos; i++) {
+        if (listaProcesos[i].id == id) {
+            cout << "\nProceso encontrado:\n";
+            cout << "ID: " << listaProcesos[i].id 
+                 << "\nNombre: " << listaProcesos[i].nombre 
+                 << "\nPrioridad: " << listaProcesos[i].prioridad << "\n";
+            return;
+        }
+    }
+    
+    cout << "Proceso no encontrado.\n";
+}
 
 
 
