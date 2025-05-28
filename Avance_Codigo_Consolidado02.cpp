@@ -1,9 +1,7 @@
 #include <iostream>
 #include <string>
+#include <sstream> // Esto es para convertir string a int/float, en parte es importante
 using namespace std;
-
-// Constante para el tamaño máximo de estructuras
-const int MAX = 50;
 
 // ====== ESTRUCTURAS DE DATOS ======
 
@@ -12,6 +10,7 @@ struct Proceso {
     int id;
     string nombre;
     int prioridad;
+    float memoriaMB;
 };
 
 // Variables para la lista de procesos
