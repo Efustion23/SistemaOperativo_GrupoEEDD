@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
-#include <sstream> // Esto es para convertir string a int/float, en parte es importante
+#include <sstream> // Esto es para convertir string a int/float Y SI, es importante
 using namespace std;
 
-struct Proceso {
+struct Proceso
+{
     int id;
     string nombre;
     int prioridad;
@@ -35,8 +36,7 @@ struct NodoPila
 };
 NodoPila* topeMemoria = NULL;
 
-// ====== FUNCIONES DE LA LISTA ======
-
+// === FUNCIONES DE LA LISTA ===
 bool existeProceso(int id)
 {
     NodoProceso* actual = cabeza;
@@ -49,7 +49,8 @@ bool existeProceso(int id)
     return false;
 }
 
-void agregarProceso() {
+void agregarProceso()
+{
     Proceso nuevo;
     cout << "Ingrese ID del proceso: "; cin >> nuevo.id;
     if (existeProceso(nuevo.id))
@@ -76,7 +77,8 @@ void agregarProceso() {
     cout << "\n? Proceso agregado correctamente.\n";
 }
 
-void mostrarProcesos() {
+void mostrarProcesos()
+{
     if (cabeza == NULL)
 	{
         cout << "No hay procesos registrados.\n"; return;
@@ -93,7 +95,8 @@ void mostrarProcesos() {
     }
 }
 
-void buscarProceso() {
+void buscarProceso()
+{
     int id;
     cout << "Ingrese ID del proceso a buscar: "; cin >> id;
     NodoProceso* actual = cabeza;
@@ -133,6 +136,7 @@ void eliminarProceso()
     delete actual;
     cout << "Proceso eliminado correctamente.\n";
 }
+
 void modificarPrioridad()
 {
     int id, nuevaPrioridad;
@@ -152,10 +156,9 @@ void modificarPrioridad()
     cout << "Proceso no encontrado.\n";
 }
 
-
-// ====== FUNCIONES DE COLA (CPU) ======
-
-void encolarProcesoCPU() {
+// === FUNCIONES DE COLA (CPU) ===
+void encolarProcesoCPU()
+{
     int id;
     cout << "Ingrese ID del proceso a encolar: "; cin >> id;
     NodoProceso* actual = cabeza;
@@ -186,7 +189,8 @@ void encolarProcesoCPU() {
     cout << "Proceso encolado correctamente.\n";
 }
 
-void ejecutarProcesoCPU() {
+void ejecutarProcesoCPU()
+{
     if (frenteCPU == NULL)
 	{
         cout << "Error: No hay procesos en la cola.\n"; return;
@@ -198,7 +202,8 @@ void ejecutarProcesoCPU() {
     delete temp;
 }
 
-void mostrarColaCPU() {
+void mostrarColaCPU()
+{
     if (frenteCPU == NULL)
 	{
         cout << "Cola vacía.\n"; return;
@@ -213,10 +218,9 @@ void mostrarColaCPU() {
     }
 }
 
-
-// ====== FUNCIONES PARA MEMORIA (PILA) ======
-
-void asignarMemoria() {
+// === FUNCIONES DE PILA (MEMORIA) ===
+void asignarMemoria()
+{
     int id;
     cout << "Ingrese ID del proceso a asignar memoria: "; cin >> id;
     NodoProceso* actual = cabeza;
@@ -232,7 +236,8 @@ void asignarMemoria() {
     cout << "Memoria asignada al proceso correctamente.\n";
 }
 
-void liberarMemoria() {
+void liberarMemoria()
+{
     if (topeMemoria == NULL)
 	{
         cout << "No hay memoria para liberar.\n"; return;
@@ -243,7 +248,8 @@ void liberarMemoria() {
     delete temp;
 }
 
-void mostrarMemoria() {
+void mostrarMemoria()
+{
     if (topeMemoria == NULL)
 	{
         cout << "Memoria vacía.\n"; return;
@@ -259,7 +265,6 @@ void mostrarMemoria() {
     }
 }
 
-//Nueva opcion jajajajjajaja
 void mostrarMemoriaTotal()
 {
     float total = 0.0;
@@ -272,15 +277,14 @@ void mostrarMemoriaTotal()
     cout << "\n?? Memoria total usada: " << total << " MB\n";
 }
 
-// ====== MENÚ PRINCIPAL ======
-
+// === MENÚS ===
 void menuProcesos()
 {
-int op;
+    int op;
     do
 	{
         cout << "\n+--------------------------------+\n";
-        cout << "|        GESTIÓN DE PROCESOS     |\n";
+        cout << "|        GESTION DE PROCESOS     |\n";
         cout << "|--------------------------------|\n";
         cout << "| 1. Agregar Proceso             |\n";
         cout << "| 2. Mostrar Procesos            |\n";
@@ -298,6 +302,7 @@ int op;
             case 3: buscarProceso(); break;
             case 4: eliminarProceso(); break;
             case 5: modificarPrioridad(); break;
+            
         }
     } while (op != 6);
 }
