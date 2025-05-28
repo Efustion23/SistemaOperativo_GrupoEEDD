@@ -3,15 +3,14 @@
 using namespace std;
 const int MAX = 50;
 
-// ====== ESTRUCTURA PARA PROCESOS ======
+// ====== ESTRUCTURAS DE DATOS ======
+
+// Estructura para representar un proceso
 struct Proceso {
     int id;
     string nombre;
     int prioridad;
-    Proceso* siguiente;
 };
-
-Proceso* cabeza = nullptr;
 
 // ====== ESTRUCTURA PARA COLA (CPU) ======
 struct NodoCola {
