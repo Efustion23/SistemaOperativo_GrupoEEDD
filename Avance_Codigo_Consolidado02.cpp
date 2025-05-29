@@ -274,7 +274,7 @@ void mostrarMemoriaTotal()
         total += actual->dato.memoriaMB;
         actual = actual->siguiente;
     }
-    cout << "\n?? Memoria total usada: " << total << " MB\n";
+    cout << "\n -----> Memoria total usada: " << total << " MB\n";
 }
 
 // === MENÚS ===
@@ -293,7 +293,7 @@ void menuProcesos()
         cout << "| 5. Modificar Prioridad         |\n";
         cout << "| 6. Volver                      |\n";
         cout << "+--------------------------------+\n";
-        cout << "Opción: "; cin >> op;
+        cout << "Opcion: "; cin >> op;
         
         switch (op)
 		{
@@ -313,14 +313,14 @@ void menuCPU()
     do
 	{
         cout << "\n+--------------------------------+\n";
-        cout << "¦         GESTION DE CPU         ¦\n";
-        cout << "¦--------------------------------¦\n";
-        cout << "¦ 1. Encolar Proceso             ¦\n";
-        cout << "¦ 2. Ejecutar Proceso            ¦\n";
-        cout << "¦ 3. Mostrar Cola                ¦\n";
-        cout << "¦ 4. Volver                      ¦\n";
+        cout << "|         GESTION DE CPU         |\n";
+        cout << "|--------------------------------|\n";
+        cout << "| 1. Encolar Proceso             |\n";
+        cout << "| 2. Ejecutar Proceso            |\n";
+        cout << "| 3. Mostrar Cola                |\n";
+        cout << "| 4. Volver                      |\n";
         cout << "+--------------------------------+\n";
-        cout << "Opción: "; cin >> op;
+        cout << "Opcion: "; cin >> op;
         switch (op)
 		{
             case 1: encolarProcesoCPU(); break;
@@ -336,16 +336,16 @@ void menuMemoria()
     do
 	{
         cout << "\n+--------------------------------+\n";
-        cout << "¦       GESTION DE MEMORIA       ¦\n";
-        cout << "¦--------------------------------¦\n";
-        cout << "¦ 1. Asignar Memoria             ¦\n";
-        cout << "¦ 2. Liberar Memoria             ¦\n";
-        cout << "¦ 3. Mostrar Memoria             ¦\n";
-        cout << "¦ 4. Ver Memoria Total           ¦\n";
-        cout << "¦ 5. Volver                      ¦\n";
+        cout << "|       GESTION DE MEMORIA       |\n";
+        cout << "|--------------------------------|\n";
+        cout << "| 1. Asignar Memoria             |\n";
+        cout << "| 2. Liberar Memoria             |\n";
+        cout << "| 3. Mostrar Memoria             |\n";
+        cout << "| 4. Ver Memoria Total           |\n";
+        cout << "| 5. Volver                      |\n";
         cout << "+--------------------------------+\n";
         
-        cout << "Opción: "; cin >> op;
+        cout << "Opcion: "; cin >> op;
         
         switch (op)
 		{
@@ -369,7 +369,7 @@ int main()
         cout << "2. Gestion de CPU\n";
         cout << "3. Gestion de Memoria\n";
         cout << "4. Salir\n";
-        cout << "Seleccione una opción: ";
+        cout << "Seleccione una opcion: ";
         cin >> opcion;
         switch (opcion)
 		{
