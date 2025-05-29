@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <sstream> // Esto es para convertir string a int/float Y SI, es importante
 using namespace std;
 
 struct Proceso
