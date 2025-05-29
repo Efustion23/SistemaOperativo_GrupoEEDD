@@ -21,8 +21,8 @@ NodoProceso* cabeza = NULL;
 // === COLA DE PRIORIDAD PARA CPU ===
 struct NodoCola
 {
-     Proceso dato;
-     NodoCola* siguiente;
+    Proceso dato;
+    NodoCola* siguiente;
 };
 NodoCola* frenteCPU = NULL;
 NodoCola* finalCPU = NULL;
@@ -162,7 +162,7 @@ void encolarProcesoCPU()
     NodoProceso* actual = cabeza;
     while (actual != NULL && actual->dato.id != id) actual = actual->siguiente;
     if (actual == NULL)
-	{
+    {
         cout << "Error: No existe un proceso con ese ID.\n"; return;
     }
     NodoCola* nuevo = new NodoCola;
@@ -170,13 +170,13 @@ void encolarProcesoCPU()
     nuevo->siguiente = NULL;
 
     if (frenteCPU == NULL || nuevo->dato.prioridad > frenteCPU->dato.prioridad)
-	{
+    {
         nuevo->siguiente = frenteCPU;
         frenteCPU = nuevo;
         if (finalCPU == NULL) finalCPU = nuevo;
     }
-	else
-	{
+    else
+    {
         NodoCola* temp = frenteCPU;
         while (temp->siguiente != NULL && temp->siguiente->dato.prioridad >= nuevo->dato.prioridad)
             temp = temp->siguiente;
@@ -190,7 +190,7 @@ void encolarProcesoCPU()
 void ejecutarProcesoCPU()
 {
     if (frenteCPU == NULL)
-	{
+    {
         cout << "Error: No hay procesos en la cola.\n"; return;
     }
     NodoCola* temp = frenteCPU;
@@ -203,13 +203,13 @@ void ejecutarProcesoCPU()
 void mostrarColaCPU()
 {
     if (frenteCPU == NULL)
-	{
+    {
         cout << "Cola vacía.\n"; return;
     }
     cout << "\n=== COLA DE CPU ===\n";
     NodoCola* actual = frenteCPU;
     while (actual != NULL)
-	{
+    {
         cout << "ID: " << actual->dato.id << " | Nombre: " << actual->dato.nombre
              << " | Prioridad: " << actual->dato.prioridad << "\n";
         actual = actual->siguiente;
