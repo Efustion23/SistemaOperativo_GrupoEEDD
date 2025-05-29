@@ -22,8 +22,8 @@ NodoProceso* cabeza = NULL;
 // === COLA DE PRIORIDAD PARA CPU ===
 struct NodoCola
 {
-    Proceso dato;
-    NodoCola* siguiente;
+     Proceso dato;
+     NodoCola* siguiente;
 };
 NodoCola* frenteCPU = NULL;
 NodoCola* finalCPU = NULL;
@@ -76,12 +76,11 @@ void agregarProceso()
     }
     cout << "\n? Proceso agregado correctamente.\n";
 }
-
 void mostrarProcesos()
 {
-    if (cabeza == NULL)
-	{
-        cout << "No hay procesos registrados.\n"; return;
+    if (cabeza==NULL)
+    {
+	    cout<< "No hay procesos registrados.\n";return;
     }
     cout << "\n=== LISTA DE PROCESOS ===\n";
     NodoProceso* actual = cabeza;
