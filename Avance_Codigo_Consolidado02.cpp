@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <sstream> // Esto es para convertir string a int/float Y SI, es importante
+#include <stream> // Esto es para convertir string a int/float Y SI, es importante
 using namespace std;
 
 struct Proceso
@@ -74,7 +74,7 @@ void agregarProceso()
         while (actual->siguiente != NULL) actual = actual->siguiente;
         actual->siguiente = nodo;
     }
-    cout << "\n? Proceso agregado correctamente.\n";
+    cout << "\n Proceso agregado correctamente.\n";
 }
 void mostrarProcesos()
 {
@@ -358,6 +358,7 @@ void menuMemoria()
 
 int main()
 {
+    setlocale(LC_CTYPE, "Spanish");
     int opcion;
     do
 	{
