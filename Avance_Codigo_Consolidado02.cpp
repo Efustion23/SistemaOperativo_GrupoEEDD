@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <cstdio>
+#include <cstdio> //Esta libreria es para que funcionen las funciones de guardado y cargado de procesos en un archivo txt
 
 using namespace std;
 
