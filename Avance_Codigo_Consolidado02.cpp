@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <cstdio>
+
 using namespace std;
 
 struct Proceso
@@ -10,7 +12,6 @@ struct Proceso
     float memoriaMB;
 };
 
-// === LISTA ENLAZADA PARA PROCESOS ===
 struct NodoProceso
 {
     Proceso dato;
@@ -18,7 +19,6 @@ struct NodoProceso
 };
 NodoProceso* cabeza = NULL;
 
-// === COLA DE PRIORIDAD PARA CPU ===
 struct NodoCola
 {
     Proceso dato;
@@ -27,7 +27,6 @@ struct NodoCola
 NodoCola* frenteCPU = NULL;
 NodoCola* finalCPU = NULL;
 
-// === PILA PARA MEMORIA ===
 struct NodoPila
 {
     Proceso dato;
@@ -35,11 +34,9 @@ struct NodoPila
 };
 NodoPila* topeMemoria = NULL;
 
-// === FUNCIONES DE LA LISTA ===
 bool existeProceso(int id)
 {
     NodoProceso* actual = cabeza;
-    
     while (actual != NULL)
 	{
         if (actual->dato.id == id) return true;
@@ -60,26 +57,27 @@ void agregarProceso()
     cin.ignore();
     cout << "Ingrese nombre del proceso: "; getline(cin, nuevo.nombre);
     cout << "Ingrese prioridad (1-10): "; cin >> nuevo.prioridad;
-    cout << "Ingrese memoria que usará el proceso (MB): "; cin >> nuevo.memoriaMB;
+    cout << "Ingrese memoria que usara el proceso (MB): "; cin >> nuevo.memoriaMB;
 
     NodoProceso* nodo = new NodoProceso;
     nodo->dato = nuevo;
     nodo->siguiente = NULL;
 
     if (cabeza == NULL) cabeza = nodo;
-    else
+    else 
 	{
         NodoProceso* actual = cabeza;
         while (actual->siguiente != NULL) actual = actual->siguiente;
         actual->siguiente = nodo;
     }
-    cout << "\n Proceso agregado correctamente.\n";
+    cout << "\nProceso agregado correctamente.\n";
 }
+
 void mostrarProcesos()
 {
-    if (cabeza==NULL)
-    {
-	    cout<< "No hay procesos registrados.\n";return;
+    if (cabeza == NULL)
+	{
+        cout << "No hay procesos registrados.\n"; return;
     }
     cout << "\n=== LISTA DE PROCESOS ===\n";
     NodoProceso* actual = cabeza;
@@ -154,7 +152,6 @@ void modificarPrioridad()
     cout << "Proceso no encontrado.\n";
 }
 
-// === FUNCIONES DE COLA (CPU) ===
 void encolarProcesoCPU()
 {
     int id;
@@ -162,7 +159,7 @@ void encolarProcesoCPU()
     NodoProceso* actual = cabeza;
     while (actual != NULL && actual->dato.id != id) actual = actual->siguiente;
     if (actual == NULL)
-    {
+	{
         cout << "Error: No existe un proceso con ese ID.\n"; return;
     }
     NodoCola* nuevo = new NodoCola;
@@ -170,13 +167,13 @@ void encolarProcesoCPU()
     nuevo->siguiente = NULL;
 
     if (frenteCPU == NULL || nuevo->dato.prioridad > frenteCPU->dato.prioridad)
-    {
+	{
         nuevo->siguiente = frenteCPU;
         frenteCPU = nuevo;
         if (finalCPU == NULL) finalCPU = nuevo;
     }
-    else
-    {
+	else
+	{
         NodoCola* temp = frenteCPU;
         while (temp->siguiente != NULL && temp->siguiente->dato.prioridad >= nuevo->dato.prioridad)
             temp = temp->siguiente;
@@ -190,7 +187,7 @@ void encolarProcesoCPU()
 void ejecutarProcesoCPU()
 {
     if (frenteCPU == NULL)
-    {
+	{
         cout << "Error: No hay procesos en la cola.\n"; return;
     }
     NodoCola* temp = frenteCPU;
@@ -203,20 +200,19 @@ void ejecutarProcesoCPU()
 void mostrarColaCPU()
 {
     if (frenteCPU == NULL)
-    {
+	{
         cout << "Cola vacía.\n"; return;
     }
     cout << "\n=== COLA DE CPU ===\n";
     NodoCola* actual = frenteCPU;
     while (actual != NULL)
-    {
+	{
         cout << "ID: " << actual->dato.id << " | Nombre: " << actual->dato.nombre
              << " | Prioridad: " << actual->dato.prioridad << "\n";
         actual = actual->siguiente;
     }
 }
 
-// === FUNCIONES DE PILA (MEMORIA) ===
 void asignarMemoria()
 {
     int id;
@@ -275,7 +271,71 @@ void mostrarMemoriaTotal()
     cout << "\n -----> Memoria total usada: " << total << " MB\n";
 }
 
-// === MENÚS ===
+void guardarProcesosEnArchivo()
+{
+    FILE* archivo = fopen("procesos.txt", "w");
+    if (archivo == NULL)
+	{
+        cout << "Error al abrir el archivo para guardar.\n";
+        return;
+    }
+
+    NodoProceso* actual = cabeza;
+    while (actual != NULL)
+	{
+        fprintf(archivo, "%d;%s;%d;%.2f\n",
+            actual->dato.id,
+            actual->dato.nombre.c_str(),
+            actual->dato.prioridad,
+            actual->dato.memoriaMB);
+        actual = actual->siguiente;
+    }
+
+    fclose(archivo);
+    cout << "Procesos guardados en archivo correctamente.\n";
+}
+
+void cargarProcesosDesdeArchivo()
+{
+    FILE* archivo = fopen("procesos.txt", "r");
+    if (archivo == NULL)
+	{
+        cout << "No se encontró el archivo de procesos.\n";
+        return;
+    }
+
+    while (true)
+    {
+        Proceso nuevo;
+        char nombreTemp[100];
+
+        int leidos = fscanf(archivo, "%d;%99[^;];%d;%f\n",
+                            &nuevo.id,
+                            nombreTemp,
+                            &nuevo.prioridad,
+                            &nuevo.memoriaMB);
+
+        if (leidos != 4) break; // Línea corrupta o fin de archivo
+
+        nuevo.nombre = nombreTemp;
+
+        NodoProceso* nodo = new NodoProceso;
+        nodo->dato = nuevo;
+        nodo->siguiente = NULL;
+
+        if (cabeza == NULL) cabeza = nodo;
+        else
+		{
+            NodoProceso* actual = cabeza;
+            while (actual->siguiente != NULL) actual = actual->siguiente;
+            actual->siguiente = nodo;
+        }
+    }
+
+    fclose(archivo);
+    cout << "Procesos cargados desde archivo correctamente.\n";
+}
+
 void menuProcesos()
 {
     int op;
@@ -292,7 +352,7 @@ void menuProcesos()
         cout << "| 6. Volver                      |\n";
         cout << "+--------------------------------+\n";
         cout << "Opcion: "; cin >> op;
-        
+
         switch (op)
 		{
             case 1: agregarProceso(); break;
@@ -300,7 +360,6 @@ void menuProcesos()
             case 3: buscarProceso(); break;
             case 4: eliminarProceso(); break;
             case 5: modificarPrioridad(); break;
-            
         }
     } while (op != 6);
 }
@@ -342,9 +401,7 @@ void menuMemoria()
         cout << "| 4. Ver Memoria Total           |\n";
         cout << "| 5. Volver                      |\n";
         cout << "+--------------------------------+\n";
-        
         cout << "Opcion: "; cin >> op;
-        
         switch (op)
 		{
             case 1: asignarMemoria(); break;
@@ -357,7 +414,7 @@ void menuMemoria()
 
 int main()
 {
-    setlocale(LC_CTYPE, "Spanish");
+    cargarProcesosDesdeArchivo();
     int opcion;
     do
 	{
@@ -375,8 +432,10 @@ int main()
             case 1: menuProcesos(); break;
             case 2: menuCPU(); break;
             case 3: menuMemoria(); break;
-            case 4: cout << "Saliendo del programa...\n"; break;
-            default: cout << "Opción no válida.\n";
+            case 4:
+                guardarProcesosEnArchivo();
+                cout << "Saliendo del programa...\n";
+                break;
         }
     } while (opcion != 4);
     return 0;
