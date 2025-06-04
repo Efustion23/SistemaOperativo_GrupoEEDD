@@ -409,8 +409,7 @@ void menuCPU()
 void menuMemoria()
 {
     int op;
-    do
-	{
+    do {
         cout << "\n+--------------------------------+\n";
         cout << "|       GESTION DE MEMORIA       |\n";
         cout << "|--------------------------------|\n";
@@ -420,19 +419,24 @@ void menuMemoria()
         cout << "| 4. Ver Memoria Total           |\n";
         cout << "| 5. Volver                      |\n";
         cout << "+--------------------------------+\n";
-        cout << "Opcion: "; cin >> op;
-        switch (op)
-		{
+
+        do {
+            cout << "Opcion (1-5): ";
+            cin >> op;
+            if (op < 1 || op > 5) {
+                cout << "Error: Ingrese una opcion valida entre 1 y 5.\n";
+            }
+        } while (op < 1 || op > 5);
+
+        switch (op) {
             case 1: asignarMemoria(); break;
             case 2: liberarMemoria(); break;
             case 3: mostrarMemoria(); break;
             case 4: mostrarMemoriaTotal(); break;
         }
+
     } while (op != 5);
 }
-
-#include <iostream>
-using namespace std;
 
 int main()
 {
