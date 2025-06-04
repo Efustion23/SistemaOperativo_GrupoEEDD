@@ -48,7 +48,14 @@ bool existeProceso(int id)
 void agregarProceso()
 {
     Proceso nuevo;
-    cout << "Ingrese ID del proceso: "; cin >> nuevo.id;
+do {
+    cout << "Ingrese ID del proceso: ";
+    cin >> nuevo.id;
+    if (nuevo.id <= 0) {
+        cout << "Error: El ID debe ser un número mayor a 0.\n";
+    }
+} while (nuevo.id <= 0);
+
     if (existeProceso(nuevo.id))
 	{
         cout << "Error: Ya existe un proceso con ese ID.\n";
@@ -424,12 +431,15 @@ void menuMemoria()
     } while (op != 5);
 }
 
+#include <iostream>
+using namespace std;
+
 int main()
 {
     cargarProcesosDesdeArchivo();
     int opcion;
-    do
-	{
+
+    do {
         cout << "\n-------------------------------------\n";
         cout << "     SISTEMA DE GESTION DE PROCESOS  \n";
         cout << "-------------------------------------\n";
@@ -437,18 +447,26 @@ int main()
         cout << "2. Gestion de CPU\n";
         cout << "3. Gestion de Memoria\n";
         cout << "4. Salir\n";
-        cout << "Seleccione una opcion: ";
-        cin >> opcion;
-        switch (opcion)
-		{
+
+        do {
+            cout << "Seleccione una opcion (1-4): ";
+            cin >> opcion;
+            if (opcion < 1 || opcion > 4) {
+                cout << "Error: Ingrese una opcion valida entre 1 y 4.\n";
+            }
+        } while (opcion < 1 || opcion > 4);
+
+        switch (opcion) {
             case 1: menuProcesos(); break;
             case 2: menuCPU(); break;
             case 3: menuMemoria(); break;
-            case 4:
-                guardarProcesosEnArchivo();
+            case 4: guardarProcesosEnArchivo();
                 cout << "Saliendo del programa...\n";
                 break;
         }
+
     } while (opcion != 4);
+
     return 0;
 }
+
