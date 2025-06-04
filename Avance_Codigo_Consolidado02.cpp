@@ -59,10 +59,10 @@ void agregarProceso()
     do {
         cout << "Ingrese prioridad (1-10): ";
         cin >> nuevo.prioridad;
-        if (nuevo.prioridad =< 1 || nuevo.prioridad >= 10) {
+        if (nuevo.prioridad <= 1 || nuevo.prioridad >= 10) {
             cout << "Error: La prioridad debe estar entre 1 y 10.\n";
         }
-    } while (nuevo.prioridad =< 1 || nuevo.prioridad >= 10);
+    } while (nuevo.prioridad <= 1 || nuevo.prioridad >= 10);
     do {
         cout << "Ingrese memoria que usara el proceso (MB): ";
         cin >> nuevo.memoriaMB;
