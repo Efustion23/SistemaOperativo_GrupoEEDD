@@ -358,8 +358,7 @@ void cargarProcesosDesdeArchivo()
 void menuProcesos()
 {
     int op;
-    do
-	{
+    do {
         cout << "\n+--------------------------------+\n";
         cout << "|        GESTION DE PROCESOS     |\n";
         cout << "|--------------------------------|\n";
@@ -370,25 +369,32 @@ void menuProcesos()
         cout << "| 5. Modificar Prioridad         |\n";
         cout << "| 6. Volver                      |\n";
         cout << "+--------------------------------+\n";
-        cout << "Opcion: "; cin >> op;
 
-        switch (op)
-		{
+        do {
+            cout << "Opcion (1-6): ";
+            cin >> op;
+            if (op < 1 || op > 6) {
+                cout << "Error: Ingrese una opcion valida entre 1 y 6.\n";
+            }
+        } while (op < 1 || op > 6);
+
+        switch (op) {
             case 1: agregarProceso(); break;
             case 2: mostrarProcesos(); break;
             case 3: buscarProceso(); break;
             case 4: eliminarProceso(); break;
             case 5: modificarPrioridad(); break;
+            // El caso 6 no necesita código porque solo rompe el bucle
         }
+
     } while (op != 6);
 }
 
 void menuCPU()
 {
     int op;
-    do
-	{
-        cout << "\n+--------------------------------+\n";
+    do {
+        cout << "\n+------------------------------+\n";
         cout << "|         GESTION DE CPU         |\n";
         cout << "|--------------------------------|\n";
         cout << "| 1. Encolar Proceso             |\n";
@@ -396,15 +402,25 @@ void menuCPU()
         cout << "| 3. Mostrar Cola                |\n";
         cout << "| 4. Volver                      |\n";
         cout << "+--------------------------------+\n";
-        cout << "Opcion: "; cin >> op;
-        switch (op)
-		{
+
+        do {
+            cout << "Opcion (1-4): ";
+            cin >> op;
+            if (op < 1 || op > 4) {
+                cout << "Error: Ingrese una opcion valida entre 1 y 4.\n";
+            }
+        } while (op < 1 || op > 4);
+
+        switch (op) {
             case 1: encolarProcesoCPU(); break;
             case 2: ejecutarProcesoCPU(); break;
             case 3: mostrarColaCPU(); break;
+            // Opción 4 no necesita acción: simplemente se sale del bucle
         }
+
     } while (op != 4);
 }
+
 
 void menuMemoria()
 {
